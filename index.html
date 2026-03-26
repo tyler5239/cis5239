@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tyler Hughes | Home</title>
+  <link rel="stylesheet" type="text/css" href="fancy.css">
+</head>
+<body>
+  <h1>Welcome to My Personal Website</h1>
+
+  <nav>
+    <p>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a> |
+      <a href="resume.html">Resume</a>
+    </p>
+  </nav>
+
+  <p>
+    Hello, and welcome to my personal website. This page was created as part of a web development assignment, and it is designed to show the basics of HTML, CSS, and JavaScript in one place. I am interested in learning how websites are built because the internet plays a <strong>major</strong> role in how people communicate, work, and share information today. Even a simple webpage can be <em>useful</em> when it is organized well and easy to navigate.
+  </p>
+
+  <p>
+    Building a website also teaches valuable problem-solving skills. Every page needs a clear structure, readable text, and working links so users can move through the site without confusion. In this project, I wanted to create something that looks clean and professional while still meeting the technical requirements. Learning these basics is <strong>important</strong> because web design is a very <em>practical</em> skill that can be applied in school, business, and personal projects.
+  </p>
+
+  <p>
+    This site includes an about page, a resume page, a shared CSS file, and an interactive JavaScript game. Together, these parts show how multiple files can work together to create a complete website. I also wanted the content to be easy to read, since design should support the user rather than distract from the information. A simple layout with clear headings can make a website feel more <strong>professional</strong> and more <em>accessible</em> to visitors.
+  </p>
+
+  <p>
+    In addition to the written content, this homepage includes a Tic-Tac-Toe game written in JavaScript. Small interactive features like this make websites more engaging and show that web pages can do more than just display text. As I continue learning, I hope to build larger and more <strong>advanced</strong> projects that combine structure, style, and <em>interactivity</em> in an effective way.
+  </p>
+
+  <section>
+    <h2>JavaScript Tic-Tac-Toe</h2>
+    <p>Click a square to play. Player X goes first.</p>
+    <div id="game-board" class="board">
+      <button class="cell" data-index="0" aria-label="Cell 1"></button>
+      <button class="cell" data-index="1" aria-label="Cell 2"></button>
+      <button class="cell" data-index="2" aria-label="Cell 3"></button>
+      <button class="cell" data-index="3" aria-label="Cell 4"></button>
+      <button class="cell" data-index="4" aria-label="Cell 5"></button>
+      <button class="cell" data-index="5" aria-label="Cell 6"></button>
+      <button class="cell" data-index="6" aria-label="Cell 7"></button>
+      <button class="cell" data-index="7" aria-label="Cell 8"></button>
+      <button class="cell" data-index="8" aria-label="Cell 9"></button>
+    </div>
+    <p id="status">Current player: X</p>
+    <button id="reset-button">Reset Game</button>
+  </section>
+
+  <script>
+    const cells = document.querySelectorAll('.cell');
+    const statusText = document.getElementById('status');
+    const resetButton = document.getElementById('reset-button');
+
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
+    let gameActive = true;
+
+    const winningCombos = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+
+    function handleCellClick(event) {
+      const index = event.target.getAttribute('data-index');
+
+      if (board[index] !== '' || !gameActive) {
+        return;
+      }
+
+      board[index] = currentPlayer;
+      event.target.textContent = currentPlayer;
+
+      if (checkWinner()) {
+        statusText.textContent = 'Player ' + currentPlayer + ' wins!';
+        gameActive = false;
+        return;
+      }
+
+      if (!board.includes('')) {
+        statusText.textContent = 'It is a draw!';
+        gameActive = false;
+        return;
+      }
+
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      statusText.textContent = 'Current player: ' + currentPlayer;
+    }
+
+    function checkWinner() {
+      for (let i = 0; i < winningCombos.length; i++) {
+        const [a, b, c] = winningCombos[i];
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function resetGame() {
+      board = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = 'X';
+      gameActive = true;
+      statusText.textContent = 'Current player: X';
+      cells.forEach((cell) => {
+        cell.textContent = '';
+      });
+    }
+
+    cells.forEach((cell) => {
+      cell.addEventListener('click', handleCellClick);
+    });
+
+    resetButton.addEventListener('click', resetGame);
+  </script>
+</body>
+</html>
