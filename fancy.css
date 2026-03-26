@@ -66,6 +66,10 @@ iframe {
   cursor: pointer;
 }
 
-div {
-  max-width: 900px;
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  gap: 8px;
+  margin: 15px auto; /* centers it */
+  justify-content: center;
 }
