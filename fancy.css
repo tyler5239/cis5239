@@ -112,3 +112,15 @@ iframe {
 a {
   transition: 0.2s;
 }
+
+.container {
+  transition: 0.3s;
+}
+
+.container:hover {
+  transform: translateY(-2px);
+}
+
+.navbar a {
+  transition: 0.2s;
+}
