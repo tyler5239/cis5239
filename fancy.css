@@ -104,3 +104,7 @@ iframe {
 #reset-button:hover {
   background-color: #2d517f;
 }
+
+.cell:hover {
+  background-color: #e6eef7;
+}
